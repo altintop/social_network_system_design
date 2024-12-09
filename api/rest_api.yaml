@@ -1,0 +1,827 @@
+openapi: 3.0.1
+info:
+  title: Social Network System Design
+  description: Социальная сеть для путешественников - Системный дизайн
+  version: '1'
+paths:
+  /api/v1/Comments/ByPostingId/{postingId}:
+    get:
+      tags:
+        - Comments
+      summary: Возвращает комментарии по идентификатору поста.
+      operationId: ByPostingId
+      parameters:
+        - name: postingId
+          in: path
+          required: true
+          description: Идентификатор поста.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+  /api/v1/Comments:
+    post:
+      tags:
+        - Comments
+      summary: Добавляет комментарий.
+      operationId: CommentsPOST
+      requestBody:
+        description: Комментарий.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Comment'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    put:
+      tags:
+        - Comments
+      summary: Обновляет комментарий.
+      operationId: CommentsPUT
+      requestBody:
+        description: Обновление комментария.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Comment'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      tags:
+        - Comments
+      summary: Удаляет комментарий.
+      operationId: CommentsDELETE
+      parameters:
+        - name: id
+          in: query
+          description: Идентификатор
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/v1/Photo/ByEntityId/{entityId}:
+    get:
+      tags:
+        - Photo
+      summary: Возвращает фотографии по идентификатору основной сущности.
+      operationId: ByEntityId
+      parameters:
+        - name: entityId
+          in: path
+          required: true
+          description: Идентификатор сущности.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+  /api/v1/Photo/AddPhotos:
+    post:
+      tags:
+        - Photo
+      summary: Добавляет фотографии в справочник
+      operationId: AddPhotos
+      requestBody:
+        description: Добавляемые фотографии.
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Photo'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Photo'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Photo'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Photo'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+  /api/v1/Photo:
+    delete:
+      tags:
+        - Photo
+      summary: Удаляет фотографию.
+      operationId: Photo
+      parameters:
+        - name: id
+          in: query
+          description: Идентификатор фотографии.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/v1/PopularPlaces:
+    get:
+      tags:
+        - PopularPlaces
+      summary: Поиск популярных мест.
+      operationId: PopularPlaces
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/v1/Postings/GetNewsFeed:
+    get:
+      tags:
+        - Postings
+      summary: Получить постраничную ленту новых постов для текущего пользователя.
+      operationId: GetNewsFeed
+      parameters:
+        - name: pageNumber
+          in: query
+          description: Номер страницы.
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+  /api/v1/Postings/GetUserPostings:
+    get:
+      tags:
+        - Postings
+      summary: Получить постраничную историю постов по другому пользователю в обратном хронологическом порядке.
+      operationId: GetUserPostings
+      parameters:
+        - name: userId
+          in: query
+          description: Идентификатор пользователя.
+          schema:
+            type: string
+            format: uuid
+        - name: pageNumber
+          in: query
+          description: Номер страницы.
+          schema:
+            type: integer
+            format: int32
+        - name: pageSize
+          in: query
+          description: Размер страницы.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+  /api/v1/Postings/GetByGpsLocation/{gpsLocation}:
+    get:
+      tags:
+        - Postings
+      summary: Получить посты по геолокации.
+      operationId: GetByGpsLocation
+      parameters:
+        - name: gpsLocation
+          in: path
+          required: true
+          description: Геолокация.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posting'
+  /api/v1/Postings:
+    post:
+      tags:
+        - Postings
+      summary: Добавить пост.
+      operationId: PostingsPOST
+      requestBody:
+        description: Добавляемый пост.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Posting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
+    put:
+      tags:
+        - Postings
+      summary: Обновить пост.
+      operationId: PostingsPUT
+      requestBody:
+        description: Обновляемый пост.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Posting'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Posting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
+    delete:
+      tags:
+        - Postings
+      summary: Удаляет пост.
+      operationId: PostingsDELETE
+      parameters:
+        - name: id
+          in: query
+          description: Идентификатор поста.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/v1/Reactions/ByEntityId/{entityId}:
+    get:
+      tags:
+        - Reactions
+      summary: Возвращает реакции по идентификатору основной сущности.
+      operationId: ByEntityId2
+      parameters:
+        - name: entityId
+          in: path
+          required: true
+          description: Идентификатор сущности.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+  /api/v1/Reactions:
+    post:
+      tags:
+        - Reactions
+      summary: Добавляет реакцию.
+      operationId: ReactionsPOST
+      requestBody:
+        description: Реакция.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+    put:
+      tags:
+        - Reactions
+      summary: Обновляет реакцию.
+      operationId: ReactionsPUT
+      requestBody:
+        description: Обновление реакции.
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Reaction'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+    delete:
+      tags:
+        - Reactions
+      summary: Удаляет реакцию
+      operationId: ReactionsDELETE
+      parameters:
+        - name: id
+          in: query
+          description: Идентификатор
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /api/v1/Subscriptions:
+    get:
+      tags:
+        - Subscriptions
+      summary: Возвращает идентификаторы всех пользователей, на которых подписан текущий пользователь.
+      operationId: SubscriptionsAll
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+    post:
+      tags:
+        - Subscriptions
+      summary: Добавляет подписку текущему пользователю.
+      operationId: SubscriptionsPOST
+      requestBody:
+        description: Идентификатор пользователя, на которого подписываемся.
+        content:
+          application/json-patch+json:
+            schema:
+              type: string
+              format: uuid
+          application/json:
+            schema:
+              type: string
+              format: uuid
+          text/json:
+            schema:
+              type: string
+              format: uuid
+          application/*+json:
+            schema:
+              type: string
+              format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+    delete:
+      tags:
+        - Subscriptions
+      summary: Удаляет подписку текущему пользователю.
+      operationId: SubscriptionsDELETE
+      parameters:
+        - name: userId
+          in: query
+          description: Идентификатор пользователя, от которого отписываемся.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+components:
+  schemas:
+    Comment:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Идентификатор.
+          format: uuid
+        createdAt:
+          type: string
+          description: Время создания.
+          format: date-time
+        userId:
+          type: string
+          description: Идентификатор пользователя.
+          format: uuid
+        postingId:
+          type: string
+          description: Идентификатор поста.
+          format: uuid
+        text:
+          type: string
+          description: Текст комментария.
+          nullable: false
+    EntityType:
+      type: integer
+      description: Тип сущности.
+      format: int32
+      x-enumNames:
+        - Posting
+        - Comment
+        - Photo
+      enum:
+        - 1
+        - 2
+        - 3
+    Photo:
+      type: object
+      description: Фотография.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Идентификатор.
+          format: uuid
+        entityId:
+          type: string
+          description: Идентификатор основной сущности.
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+        photoBytes:
+          type: string
+          description: Содержимое фотографии в байтах.
+          format: byte
+          nullable: false
+    Posting:
+      type: object
+      description: Пост.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Идентификатор.
+          format: uuid
+        createdAt:
+          type: string
+          description: Время создания.
+          format: date-time
+        userId:
+          type: string
+          description: Идентификатор пользователя.
+          format: uuid
+        title:
+          type: string
+          description: Наименование поста (тема).
+          nullable: false
+        text:
+          type: string
+          description: Текст поста.
+          nullable: false
+        gpsLocation:
+          type: string
+          description: Геолокация.
+          nullable: true
+    Reaction:
+      type: object
+      description: Реакция.
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Идентификатор.
+          format: uuid
+        createdAt:
+          type: string
+          description: Время создания.
+          format: date-time
+        userId:
+          type: string
+          description: Идентификатор пользователя.
+          format: uuid
+        entityId:
+          type: string
+          description: Идентификатор основной сущности.
+          format: uuid
+        entityType:
+          $ref: '#/components/schemas/EntityType'
+        reactionType:
+          $ref: '#/components/schemas/ReactionType'
+    ReactionType:
+      type: integer
+      description: Тип реакции.
+      format: int32
+      x-enumNames:
+        - Like
+        - Dislike
+      enum:
+        - 1
+        - 2
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Please insert JWT with Bearer into field
+      name: Authorization
+      in: header
+security:
+  - Bearer: []
+tags:
+  - name: Comments
+    description: Контроллер для работы с комментариями.
+  - name: Photo
+    description: Контроллер для работы с фотографиями.
+  - name: PopularPlaces
+    description: Контроллер для поиска популярных мест для путешествий.
+  - name: Postings
+    description: Контроллер для работы с постами.
+  - name: Reactions
+    description: Контроллер для работы с реакциями.
+  - name: Subscriptions
+    description: Контроллер для работы с подписками.
